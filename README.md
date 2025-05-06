@@ -1,5 +1,7 @@
 # SD-VSum
 
+## S-VideoXum dataset
+
 This is S-VideoXum, a dataset for Script-driven Video Summarization, derived from the existing VideoXum large-scale dataset (the latter is used for cross-modal video summarization).
 
 You can download the S-VideoXum dataset, including the h5 file with CLIP features, grountruth scores, the json file with the dataset splits, and the text annotations from the following link:
