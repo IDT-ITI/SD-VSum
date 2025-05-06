@@ -124,7 +124,7 @@ video_name.txt
 
 ## B. SD-VSum method and models
 
-These will be released at a later date.
+These materials will be released at a later date.
 
 
 ## License
