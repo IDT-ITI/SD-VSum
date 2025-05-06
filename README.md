@@ -1,4 +1,4 @@
-# SD-VSum
+# SD-VSum Paper Materials
 
 ## S-VideoXum dataset
 
@@ -120,3 +120,10 @@ Dense video captions automatically generated for each video.
 Filenames follow the pattern:
 
 video_name.txt
+
+
+## SD-VSum method and models
+
+These will be released at a later date.
+
+
