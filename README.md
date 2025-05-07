@@ -1,8 +1,14 @@
 # SD-VSum Paper Materials
 
+This repository contains the official implementation of the model proposed in the SD-VSum: A Method and Dataset for Script-Driven Video Summarization paper, along with the S-VideoXum dataset. In addition to the full training and evaluation code, it provides all necessary files and annotations required to reproduce the results.
+
+[Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075)
+
+Section A describes the dataset structure and contents, while Section B details the model implementation and usage.
+
 ## A. S-VideoXum dataset
 
-This is S-VideoXum, a dataset for Script-driven Video Summarization, derived from the existing VideoXum large-scale dataset (the latter is used for cross-modal video summarization).
+S-VideoXum is a dataset for Script-driven Video Summarization, which derived from the existing VideoXum large-scale dataset (the latter is used for cross-modal video summarization).
 
 You can download the S-VideoXum dataset, including the h5 file with CLIP features, grountruth scores, the json file with the dataset splits, and the text annotations from the following link:
 
