@@ -134,6 +134,22 @@ video_name.txt
 
 These materials will be released at a later date.
 
+## Citation
+
+This github repository provides the S-VideoXum dataset from our paper: 
+M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Script-Driven Video Summarization", arXiv:2505.03319, [doi: 10.48550/arXiv.2505.03319](https://doi.org/10.48550/arXiv.2505.03319). 
+
+If you find this dataset interesting or useful in your research, use the following Bibtex annotation to cite us:
+
+```bibtex
+@misc{mylonas2025sdvsummethoddatasetscriptdriven,
+      title={SD-VSum: A Method and Dataset for Script-Driven Video Summarization}, 
+      author={Manolis Mylonas and Evlampios Apostolidis and Vasileios Mezaris},
+      year={2025},
+      eprint={2505.03319},
+      url={https://arxiv.org/abs/2505.03319} 
+}
+```
 
 ## License
 This code is provided for academic, non-commercial use only. Please also check for any restrictions applied in the code parts and datasets used here from other sources. For the materials not covered by any such restrictions, redistribution and use in source and binary forms, with or without modification, are permitted for academic non-commercial use provided that the following conditions are met:
