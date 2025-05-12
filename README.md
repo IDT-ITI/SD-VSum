@@ -136,7 +136,7 @@ These materials will be released at a later date.
 
 ## Citation
 
-This github repository provides the S-VideoXum dataset from our paper: 
+The S-VideoXum dataset is proposed our paper: 
 M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Script-Driven Video Summarization", arXiv:2505.03319, [doi: 10.48550/arXiv.2505.03319](https://doi.org/10.48550/arXiv.2505.03319). 
 
 If you find this dataset interesting or useful in your research, use the following Bibtex annotation to cite us:
