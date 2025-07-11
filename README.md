@@ -26,12 +26,14 @@ The CLIP embeddings (visual and textual) released with S-VideoXum were extracted
 
 ### Folder Structure of the Dataset
 
+```
 dataset/
 ├── script_videoxum.h5
 ├── script_videoxum_splits.json
 └── Text Annotations/
-├── Scripts/
-└── Dense Captions/
+      ├── Scripts/
+      └── Dense Captions/
+```
 
 ---
 ### 1. `script_videoxum.h5`
@@ -132,11 +134,65 @@ video_name.txt
 
 ## B. SD-VSum method and models
 
-These materials will be released at a later date.
+This repository implements SD-VSum, a method for script-driven video summarization, and provides scripts to train, test, and run the model in inference.
+
+### Installation
+
+Clone the repository
+   ```
+   git clone https://github.com/IDT-ITI/SD-VSum.git
+   cd SD-VSum
+   ```
+Create and activate the Conda environment
+   ```
+   conda env create -f environment.yml
+   conda activate sd_vsum
+   ```
+### Dataset Preparation
+
+Download the S-VideoXum dataset
+   - Retrieve the .h5 file and the splits.json file from [Zenodo link](https://zenodo.org/records/15349075)
+   - Place both files under the ```dataset``` directory
+      ```
+      SD-VSum
+       └── dataset/
+            ├── script_videoxum.h5
+            ├── script_videoxum_splits.h5
+            ├── S_NewsVSum.h5
+            └── S_NewsVSum_splits.json
+      ```
+
+### Pretrained Models
+
+Download the pretrained SD-VSum model (trained on S-VideoXum) from the Zenodo directory and place it in a local folder.
+
+### Usage
+
+#### Inference on Pretrained Model
+To run inference on S-VideoXum using the pretrained checkpoint:
+```
+python main.py --exp_num='exp1' --ckpt_path='path/to/pkl/file' --train=False --dataset='S_VideoXum'
+```
+
+#### Train model on S-VideoXum
+S-VideoXum has a {train, validation, test} split. After each training epoch, the model is evaluated on the validation set. After the training is completed, the model that performed better on the validation set is evaluated on the test set. The checkpoint of this model is saved as a .pkl file. To train a model on the S-VideoXum dataset, use the following command:
+```
+python main.py --exp_num='exp2' --epochs=E --batch_size=B --train=True --dataset='S_VideoXum'
+```
+
+#### Train model on S-NewsVSum
+S-NewsVSum has a 5-fold split. To train the SD-VSum model in this dataset, use the following commands:
+```
+python main.py --exp_num='exp3' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=0
+python main.py --exp_num='exp4' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=1
+python main.py --exp_num='exp5' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=2
+python main.py --exp_num='exp6' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=3
+python main.py --exp_num='exp7' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=4
+```
 
 ## Citation
 
-The S-VideoXum dataset is proposed our paper: 
+The S-VideoXum dataset is proposed in our paper: 
 M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Script-Driven Video Summarization", arXiv:2505.03319, [doi: 10.48550/arXiv.2505.03319](https://doi.org/10.48550/arXiv.2505.03319). 
 
 If you find this dataset interesting or useful in your research, use the following Bibtex annotation to cite us:
