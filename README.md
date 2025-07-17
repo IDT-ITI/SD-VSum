@@ -168,11 +168,7 @@ Download the pretrained SD-VSum model (trained on S-VideoXum) from the Zenodo di
 
 ### Usage
 
-#### Inference on Pretrained Model
-To run inference on S-VideoXum using the pretrained checkpoint:
-```
-python main.py --exp_num='exp1' --ckpt_path='path/to/pkl/file' --train=False --dataset='S_VideoXum'
-```
+This project includes the full SD-VSum architecture and setup required to train and run the model. You can train SD-VSum on the two provided datasets (S-VideoXum and S-NewsVSum) or use our provided pretrained checkpoint (trained on S-VideoXum) for immediate inference.
 
 #### Train model on S-VideoXum
 S-VideoXum has a {train, validation, test} split. After each training epoch, the model is evaluated on the validation set. After the training is completed, the model that performed better on the validation set is evaluated on the test set. The checkpoint of this model is saved as a .pkl file. To train a model on the S-VideoXum dataset, use the following command:
@@ -190,6 +186,12 @@ python main.py --exp_num='exp6' --epochs=E --batch_size=B --train=True --dataset
 python main.py --exp_num='exp7' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=4
 ```
 
+#### Inference on Pretrained Model
+To run inference on S-VideoXum using the pretrained checkpoint:
+```
+python main.py --exp_num='exp1' --ckpt_path='path/to/pkl/file' --train=False --dataset='S_VideoXum'
+```
+
 ## Citation
 
 The S-VideoXum dataset is proposed in our paper: 
@@ -198,12 +200,13 @@ M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Scrip
 If you find this dataset interesting or useful in your research, use the following Bibtex annotation to cite us:
 
 ```bibtex
-@misc{mylonas2025sdvsummethoddatasetscriptdriven,
+@inproceedings{mylonas2025sdvsummethoddatasetscriptdriven,
       title={SD-VSum: A Method and Dataset for Script-Driven Video Summarization}, 
       author={Manolis Mylonas and Evlampios Apostolidis and Vasileios Mezaris},
       year={2025},
-      eprint={2505.03319},
-      url={https://arxiv.org/abs/2505.03319} 
+      booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia},
+      location = {Dublin, Ireland},
+      series = {MM '25}
 }
 ```
 
