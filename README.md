@@ -4,7 +4,7 @@ This repository contains the official implementation of the model proposed in th
 
 [Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075)
 
-Section A describes the dataset structure and contents, while Section B details the model implementation and usage.
+Section A describes the S-VideoXum dataset structure and contents, Section B describes the S-NewsVSum, while Section C details the model implementation and usage.
 
 ## A. S-VideoXum dataset
 
@@ -131,8 +131,35 @@ Filenames follow the pattern:
 
 video_name.txt
 
+## B. S-NewsVSum dataset
 
-## B. SD-VSum method and models
+S-NewsVSum is a dataset comprising 45 professionally edited videos, their corresponding human-authored scripts, and ground‑truth summaries created by a media company. Although the original video and script files are proprietary, this repository provides precomputed CLIP-based embeddings and split definitions to facilitate research on script-driven summarization.
+
+### Dataset Contents
+
+- **`S_NewsVSum.h5`**  
+  An HDF5 file containing, for each video (group named by `video_name`):
+  - `n_frames`  
+    Number of frames after downsampling (2 fps).  
+    _Type: scalar integer_
+  - `video_embeddings`  
+    CLIP feature matrix for each downsampled frame.  
+    _Shape: [n_frames, 512]_
+  - `text_embeddings`  
+    CLIP feature matrix for the script text, split into M sentences.  
+    _Shape: [M, 512]_
+  - `gtsummaries`  
+    Human-edited ground‑truth summary scores (binary inclusion per frame).  
+    _Shape: [1, n_frames]_
+  - `change_points`  
+    Array of shot boundaries, where each row is [start_frame, end_frame].  
+    _Shape: [num_segments, 2]_
+
+- **`S_NewsVSum_splits.json`**  
+  A JSON file defining five folds for cross‑validation. Each fold specifies lists of video names for training and testing.
+
+
+## C. SD-VSum method and models
 
 This repository implements SD-VSum, a method for script-driven video summarization, and provides scripts to train, test, and run the model in inference.
 
