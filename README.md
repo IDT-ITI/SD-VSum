@@ -2,7 +2,7 @@
 
 This repository contains the official implementation of the model proposed in the SD-VSum: A Method and Dataset for Script-Driven Video Summarization paper, along with the S-VideoXum dataset. In addition to the full training and evaluation code, it provides all necessary files and annotations required to reproduce the results.
 
-[Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075)
+[Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075) | [SD-VSum Pretrained Model Checkpoint](https://zenodo.org/records/16275302)
 
 Section A describes the S-VideoXum dataset structure and contents, Section B describes the S-NewsVSum, while Section C details the model implementation and usage.
 
@@ -191,7 +191,7 @@ Download the S-VideoXum dataset
 
 ### Pretrained Models
 
-Download the pretrained SD-VSum model (trained on S-VideoXum) from the Zenodo directory and place it in a local folder.
+Download the pretrained SD-VSum model (trained on S-VideoXum) [Checkpoint](https://zenodo.org/records/16275302) and place it in a local folder.
 
 ### Usage
 
