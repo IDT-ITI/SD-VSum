@@ -221,12 +221,12 @@ python main.py --exp_num='exp1' --ckpt_path='path/to/pkl/file' --train=False --d
 
 ## Citation
 
-The S-VideoXum dataset is proposed in our paper: 
+The S-VideoXum and S-NewsVSum datasets, as well as the SD-VSum method, were proposed in our paper: 
 M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Script-Driven Video Summarization", Proc. 33rd ACM International Conference on Multimedia (ACM MM 2025), Dublin, Ireland, Oct. 2025.
 
 Pre-print: arXiv:2505.03319, [doi: 10.48550/arXiv.2505.03319](https://doi.org/10.48550/arXiv.2505.03319). 
 
-If you find this dataset interesting or useful in your research, use the following Bibtex annotation to cite us:
+If you find these resources interesting or useful in your research, use the following Bibtex annotation to cite us:
 
 ```bibtex
 @inproceedings{mylonas2025sdvsummethoddatasetscriptdriven,
