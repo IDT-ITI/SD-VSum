@@ -2,15 +2,15 @@
 
 This repository contains the official implementation of the model proposed in the SD-VSum: A Method and Dataset for Script-Driven Video Summarization paper, along with the S-VideoXum dataset. In addition to the full training and evaluation code, it provides all necessary files and annotations required to reproduce the results.
 
-[Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075)
+[Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075) | [SD-VSum Pretrained Model Checkpoint](https://zenodo.org/records/16275302)
 
-Section A describes the dataset structure and contents, while Section B details the model implementation and usage.
+Section A describes the S-VideoXum dataset structure and contents, Section B describes the S-NewsVSum, while Section C details the model implementation and usage.
 
 ## A. S-VideoXum dataset
 
 S-VideoXum is a dataset for Script-driven Video Summarization, which derived from the existing VideoXum large-scale dataset (the latter is used for cross-modal video summarization).
 
-You can download the S-VideoXum dataset, including the h5 file with CLIP features, grountruth scores, the json file with the dataset splits, and the text annotations from the following link:
+You can download the S-VideoXum dataset, including the h5 file with CLIP features, ground-truth scores, the json file with the dataset splits, and the text annotations from the following link:
 
 [Zenodo: S-VideoXum: A Dataset for Script-driven Video Summarization](https://zenodo.org/records/15349075)
 
@@ -26,12 +26,14 @@ The CLIP embeddings (visual and textual) released with S-VideoXum were extracted
 
 ### Folder Structure of the Dataset
 
+```
 dataset/
 ├── script_videoxum.h5
 ├── script_videoxum_splits.json
 └── Text Annotations/
-├── Scripts/
-└── Dense Captions/
+      ├── Scripts/
+      └── Dense Captions/
+```
 
 ---
 ### 1. `script_videoxum.h5`
@@ -129,25 +131,111 @@ Filenames follow the pattern:
 
 video_name.txt
 
+## B. S-NewsVSum dataset
 
-## B. SD-VSum method and models
+S-NewsVSum is a dataset comprising 45 professionally edited videos, their corresponding human-authored scripts, and ground‑truth summaries created by a media company. Although the original video and script files are proprietary, this repository provides precomputed CLIP-based embeddings and split definitions to facilitate research on script-driven summarization.
 
-These materials will be released at a later date.
+### Dataset Contents
+
+- **`S_NewsVSum.h5`**  
+  An HDF5 file containing, for each video (group named by `video_name`):
+  - `n_frames`  
+    Number of frames after downsampling (2 fps).  
+    _Type: scalar integer_
+  - `video_embeddings`  
+    CLIP feature matrix for each downsampled frame.  
+    _Shape: [n_frames, 512]_
+  - `text_embeddings`  
+    CLIP feature matrix for the script text, split into M sentences.  
+    _Shape: [M, 512]_
+  - `gtsummaries`  
+    Human-edited ground‑truth summary scores (binary inclusion per frame).  
+    _Shape: [1, n_frames]_
+  - `change_points`  
+    Array of shot boundaries, where each row is [start_frame, end_frame].  
+    _Shape: [num_segments, 2]_
+
+- **`S_NewsVSum_splits.json`**  
+  A JSON file defining five folds for cross‑validation. Each fold specifies lists of video names for training and testing.
+
+
+## C. SD-VSum method and models
+
+This repository implements SD-VSum, a method for script-driven video summarization, and provides scripts to train, test, and run the model in inference.
+
+### Installation
+
+Clone the repository
+   ```
+   git clone https://github.com/IDT-ITI/SD-VSum.git
+   cd SD-VSum
+   ```
+Create and activate the Conda environment
+   ```
+   conda env create -f environment.yml
+   conda activate sd_vsum
+   ```
+### Dataset Preparation
+
+Download the S-VideoXum dataset
+   - Retrieve the .h5 file and the splits.json file from [Zenodo link](https://zenodo.org/records/15349075)
+   - Place both files under the ```dataset``` directory
+      ```
+      SD-VSum
+       └── dataset/
+            ├── script_videoxum.h5
+            ├── script_videoxum_splits.h5
+            ├── S_NewsVSum.h5
+            └── S_NewsVSum_splits.json
+      ```
+
+### Pretrained Models
+
+Download the pretrained SD-VSum model (trained on S-VideoXum) [Checkpoint](https://zenodo.org/records/16275302) and place it in a local folder.
+
+### Usage
+
+This project includes the full SD-VSum architecture and setup required to train and run the model. You can train SD-VSum on the two provided datasets (S-VideoXum and S-NewsVSum) or use our provided pretrained checkpoint (trained on S-VideoXum) for immediate inference.
+
+#### Train model on S-VideoXum
+S-VideoXum has a {train, validation, test} split. After each training epoch, the model is evaluated on the validation set. After the training is completed, the model that performed better on the validation set is evaluated on the test set. The checkpoint of this model is saved as a .pkl file. To train a model on the S-VideoXum dataset, use the following command:
+```
+python main.py --exp_num='exp2' --epochs=E --batch_size=B --train=True --dataset='S_VideoXum'
+```
+
+#### Train model on S-NewsVSum
+S-NewsVSum has a 5-fold split. To train the SD-VSum model in this dataset, use the following commands:
+```
+python main.py --exp_num='exp3' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=0
+python main.py --exp_num='exp4' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=1
+python main.py --exp_num='exp5' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=2
+python main.py --exp_num='exp6' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=3
+python main.py --exp_num='exp7' --epochs=E --batch_size=B --train=True --dataset='S_NewsVSum' --split_num=4
+```
+
+#### Inference on Pretrained Model
+To run inference on S-VideoXum using the pretrained checkpoint:
+```
+python main.py --exp_num='exp1' --ckpt_path='path/to/pkl/file' --train=False --dataset='S_VideoXum'
+```
 
 ## Citation
 
-The S-VideoXum dataset is proposed our paper: 
-M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Script-Driven Video Summarization", arXiv:2505.03319, [doi: 10.48550/arXiv.2505.03319](https://doi.org/10.48550/arXiv.2505.03319). 
+The S-VideoXum and S-NewsVSum datasets, as well as the SD-VSum method, were proposed in our paper: 
+M. Mylonas, E. Apostolidis, V. Mezaris, "SD-VSum: A Method and Dataset for Script-Driven Video Summarization", Proc. 33rd ACM International Conference on Multimedia (ACM MM 2025), Dublin, Ireland, Oct. 2025.
 
-If you find this dataset interesting or useful in your research, use the following Bibtex annotation to cite us:
+Pre-print: arXiv:2505.03319, [doi: 10.48550/arXiv.2505.03319](https://doi.org/10.48550/arXiv.2505.03319). 
+
+If you find these resources interesting or useful in your research, use the following Bibtex annotation to cite us:
 
 ```bibtex
-@misc{mylonas2025sdvsummethoddatasetscriptdriven,
+@inproceedings{mylonas2025sdvsummethoddatasetscriptdriven,
       title={SD-VSum: A Method and Dataset for Script-Driven Video Summarization}, 
       author={Manolis Mylonas and Evlampios Apostolidis and Vasileios Mezaris},
       year={2025},
-      eprint={2505.03319},
-      url={https://arxiv.org/abs/2505.03319} 
+      booktitle = {Proceedings of the 33rd ACM International Conference on Multimedia},
+      location = {Dublin, Ireland},
+      series = {MM '25}
 }
 ```
 
@@ -157,3 +245,4 @@ This code is provided for academic, non-commercial use only. Please also check f
 Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation provided with the distribution. 
 
 This software is provided by the authors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the authors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.
+
