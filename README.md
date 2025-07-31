@@ -1,6 +1,6 @@
-# SD-VSum Paper Materials
+# SD-VSum: A Method and Dataset for Script-Driven Video Summarization
 
-This repository contains the official implementation of the model proposed in the SD-VSum: A Method and Dataset for Script-Driven Video Summarization paper, along with the S-VideoXum dataset. In addition to the full training and evaluation code, it provides all necessary files and annotations required to reproduce the results.
+This repository contains the official implementation of the model proposed in the "SD-VSum: A Method and Dataset for Script-Driven Video Summarization" paper, along with the S-VideoXum dataset. In addition to the full training and evaluation code, it provides all necessary files and annotations required to reproduce the results.
 
 [Paper in arxiv](https://arxiv.org/abs/2505.03319) | [S-VideoXum Dataset in Zenodo](https://zenodo.org/records/15349075) | [SD-VSum Pretrained Model Checkpoint](https://zenodo.org/records/16275302)
 
@@ -238,6 +238,10 @@ If you find these resources interesting or useful in your research, use the foll
       series = {MM '25}
 }
 ```
+
+## Acknowledgement
+
+This work was supported by project MediaPot (TAEΔK-06196), carried out within the framework of the National Recovery and Resilience Plan Greece 2.0, funded by the European Union – NextGenerationEU, under the call RESEARCH-CREATE-INNOVATE.
 
 ## License
 This code is provided for academic, non-commercial use only. Please also check for any restrictions applied in the code parts and datasets used here from other sources. For the materials not covered by any such restrictions, redistribution and use in source and binary forms, with or without modification, are permitted for academic non-commercial use provided that the following conditions are met:
